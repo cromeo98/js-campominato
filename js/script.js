@@ -40,26 +40,19 @@ var userNums = [];
 // 2c) Chiedo all'utente tramite un ciclo while di scegliere un numero tramite (100 - 16 (diffEasy)) prompt con cui scegliere un numero da 1 a 100
 var i = 0;
 
-while (userNums.length < diffEasy - 16){
-    var userNum = parseInt(prompt('inserisci un numero tra 1 e ' + diffEasy + '. I numeri scelti sono: ' + userNums + ' (non puoi scegliere un numero precedentemente scelto.)'))
-    if (userNum >= 0 && userNum <= diffEasy && !userNums.includes(userNum)) {
-        userNums.push(userNum)
+while (userNums.length < diffEasy - 16 && !mines.includes(userNum)){
+
+    var userNum = parseInt(prompt('inserisci un numero tra 1 e ' + diffEasy + '. I numeri scelti sono: ' + userNums + ' (non puoi scegliere un numero precedentemente scelto.)')); // 3b) Altrimenti si continua chiedendo all’utente un altro numero.
+
+    if(mines.includes(userNum)) {
+        console.log(userNum);
+        alert ('Hai perso! sei riuscito ad indovinare ' + userNums.length + ' numeri, che sono: '+ userNums); // 3a) Se il numero è presente nella lista dei numeri generati, la partita termina. 3c) La partita termina quando il giocatore inserisce un numero “vietato”
+    } else if(userNum >= 0 && userNum <= diffEasy && !userNums.includes(userNum) && !mines.includes(userNum)){
+        userNums.push(userNum);
+    } 
+    if (userNums.length == diffEasy - 16) {
+        alert('Hai vinto!! I tuoi numeri vincenti sono :' + userNums) // 3d) O raggiunge il numero massimo possibile di numeri consentiti.
     }
     i++;
 }
-console.log(userNums);
-
-// for (var i = 0; i < diffEasy - 5; i++) {
-//     var userNum = parseInt(prompt('Inserisci un numero tra 1 e ' + diffEasy));
-//     if (userNum <= 0 || userNum > 100) {
-//         userNum = parseInt(prompt('Inserisci un numero tra 1 e ' + diffEasy + '!'));
-//     } else if (userNums.includes(userNum)) {
-//         userNum = parseInt(prompt('Devi scegliere un numero diverso dai precedenti! I numeri scelti sono ' + userNums));
-//     } 
-//     i++
-// }
-// console.log(userNums);
-
-
-
 
