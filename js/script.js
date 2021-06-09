@@ -22,10 +22,44 @@ var i = 0;
 while (mines.length < 16){
     var randomNum = Math.floor(Math.random() * 100) + 1;
     if (!mines.includes(randomNum)) {
-        mines.push(randomNum)
+        mines.push(randomNum);
     } 
-    i++
+    i++;
 }
 console.log(mines);
+
+// 2) In seguito deve chiedere all’utente (100 - 16) volte di inserire un numero alla volta, sempre compreso tra 1 e 100. L’utente non può inserire più volte lo stesso numero.
+// 2a) Dichiaro tre variabili per le tre difficoltà che potrà scegliere l'utente
+var diffEasy = 100;
+var diffMedium = 80;
+var diffHard = 50;
+
+// 2b) Dichiaro un array che verrà riempita con i numeri scelti dall'utente
+var userNums = [];
+
+// 2c) Chiedo all'utente tramite un ciclo while di scegliere un numero tramite (100 - 16 (diffEasy)) prompt con cui scegliere un numero da 1 a 100
+var i = 0;
+
+while (userNums.length < diffEasy - 16){
+    var userNum = parseInt(prompt('inserisci un numero tra 1 e ' + diffEasy + '. I numeri scelti sono: ' + userNums + ' (non puoi scegliere un numero precedentemente scelto.)'))
+    if (userNum >= 0 && userNum <= diffEasy && !userNums.includes(userNum)) {
+        userNums.push(userNum)
+    }
+    i++;
+}
+console.log(userNums);
+
+// for (var i = 0; i < diffEasy - 5; i++) {
+//     var userNum = parseInt(prompt('Inserisci un numero tra 1 e ' + diffEasy));
+//     if (userNum <= 0 || userNum > 100) {
+//         userNum = parseInt(prompt('Inserisci un numero tra 1 e ' + diffEasy + '!'));
+//     } else if (userNums.includes(userNum)) {
+//         userNum = parseInt(prompt('Devi scegliere un numero diverso dai precedenti! I numeri scelti sono ' + userNums));
+//     } 
+//     i++
+// }
+// console.log(userNums);
+
+
 
 
