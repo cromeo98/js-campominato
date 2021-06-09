@@ -35,20 +35,20 @@ var diffMedium = 2;
 var diffHard = 3;
 
 // BONUS B) Chiedo all'utente che difficoltà desidera
-var chooseDifficulty = parseInt(prompt('scrivi '+ diffEasy +' per difficoltà facile, '+ diffMedium + ' per difficoltà media, ' + diffHard + ' per difficoltà difficile'));
+var userChoiceOfDiff = parseInt(prompt('scrivi '+ diffEasy +' per difficoltà facile, '+ diffMedium + ' per difficoltà media, ' + diffHard + ' per difficoltà difficile'));
 
 // BONUS C) Verifico che l'utente abbia scelto il numero corrispondente alla difficoltà
 var i = 0;
 
-while (chooseDifficulty != diffEasy && chooseDifficulty != diffMedium && chooseDifficulty != diffHard){
-    chooseDifficulty = parseInt(prompt('Attenzione! Scrivi 1 per difficoltà facile, 2 per difficoltà media, 3 per difficoltà difficile'));
+while (userChoiceOfDiff != diffEasy && userChoiceOfDiff != diffMedium && userChoiceOfDiff != diffHard){
+    userChoiceOfDiff = parseInt(prompt('Attenzione! Scrivi 1 per difficoltà facile, 2 per difficoltà media, 3 per difficoltà difficile'));
     i++;
 }
 
 // BONUS D) Dichiaro una var difficoltà vuota che riempirò con 100 se l'utente avrà scelto easy, 80 se avrà scelto medium e 50 se la difficoltà è hard
 var difficulty;
 
-switch (chooseDifficulty) {
+switch (userChoiceOfDiff) {
     case 1:
         difficulty = 100
         break;
@@ -63,7 +63,19 @@ switch (chooseDifficulty) {
 // Richiamo funzione del gioco
 gameBasedOnDiff(difficulty, mines);
 
-var playAgain = prompt('vuoi giocare ancora? (si o no)')
+var playAgain = parseInt(prompt('vuoi giocare ancora? (1 = si 2 = no)'));
+
+var i = 0
+
+while (playAgain != 1 && playAgain != 2){
+    var playAgain = parseInt(prompt('vuoi giocare ancora? (1 = si 2 = no)')); 
+}
+
+if (playAgain == 1) {
+    location.reload();
+} else {
+    document.getElementById('play').innerHTML = 'BUONA GIORNATA';
+}
 
 
 //*********functions */
