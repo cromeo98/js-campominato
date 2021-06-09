@@ -29,30 +29,66 @@ while (mines.length < 16){
 console.log(mines);
 
 // 2) In seguito deve chiedere all’utente (100 - 16) volte di inserire un numero alla volta, sempre compreso tra 1 e 100. L’utente non può inserire più volte lo stesso numero.
-// 2a) Dichiaro tre variabili per le tre difficoltà che potrà scegliere l'utente
-var diffEasy = 100;
-var diffMedium = 80;
-var diffHard = 50;
+// BONUS A) Dichiaro tre variabili per le tre difficoltà che potrà scegliere l'utente
+var diffEasy = 1;
+var diffMedium = 2;
+var diffHard = 3;
 
-// 2b) Dichiaro un array che verrà riempita con i numeri scelti dall'utente
-var userNums = [];
+// BONUS B) Chiedo all'utente che difficoltà desidera
+var chooseDifficulty = parseInt(prompt('scrivi '+ diffEasy +' per difficoltà facile, '+ diffMedium + ' per difficoltà media, ' + diffHard + ' per difficoltà difficile'));
 
-// 2c) Chiedo all'utente tramite un ciclo while di scegliere un numero tramite (100 - 16 (diffEasy)) prompt con cui scegliere un numero da 1 a 100
+// BONUS C) Verifico che l'utente abbia scelto il numero corrispondente alla difficoltà
 var i = 0;
 
-while (userNums.length < diffEasy - 16 && !mines.includes(userNum)){
-
-    var userNum = parseInt(prompt('inserisci un numero tra 1 e ' + diffEasy + '. I numeri scelti sono: ' + userNums + ' (non puoi scegliere un numero precedentemente scelto.)')); // 3b) Altrimenti si continua chiedendo all’utente un altro numero.
-
-    if(mines.includes(userNum)) {
-        console.log(userNum);
-        alert ('Hai perso! sei riuscito ad indovinare ' + userNums.length + ' numeri, che sono: '+ userNums); // 3a) Se il numero è presente nella lista dei numeri generati, la partita termina. 3c) La partita termina quando il giocatore inserisce un numero “vietato”
-    } else if(userNum >= 0 && userNum <= diffEasy && !userNums.includes(userNum) && !mines.includes(userNum)){
-        userNums.push(userNum);
-    } 
-    if (userNums.length == diffEasy - 16) {
-        alert('Hai vinto!! I tuoi numeri vincenti sono :' + userNums) // 3d) O raggiunge il numero massimo possibile di numeri consentiti.
-    }
+while (chooseDifficulty != diffEasy && chooseDifficulty != diffMedium && chooseDifficulty != diffHard){
+    chooseDifficulty = parseInt(prompt('Attenzione! Scrivi 1 per difficoltà facile, 2 per difficoltà media, 3 per difficoltà difficile'));
     i++;
 }
+
+// BONUS D) Dichiaro una var difficoltà vuota che riempirò con 100 se l'utente avrà scelto easy, 80 se avrà scelto medium e 50 se la difficoltà è hard
+var difficulty;
+
+switch (chooseDifficulty) {
+    case 1:
+        difficulty = 100
+        break;
+    case 2:
+        difficulty = 80
+        break;
+    case 3:
+        difficulty = 50
+        break;    
+}
+
+// Richiamo funzione del gioco
+gameBasedOnDiff(difficulty, mines);
+
+var playAgain = prompt('vuoi giocare ancora? (si o no)')
+
+
+//*********functions */
+function gameBasedOnDiff(difficulty, conditionOfLoss) {
+    
+    // 2b) Dichiaro un array che verrà riempita con i numeri scelti dall'utente
+    var userNums = [];
+
+    // 2c) Chiedo all'utente tramite un ciclo while di scegliere un numero tramite (100 - 16 (diffEasy)) prompt con cui scegliere un numero da 1 a 100
+    var i = 0;
+
+    while (userNums.length < difficulty - 16 && !conditionOfLoss.includes(userNum)){
+
+    var userNum = parseInt(prompt('inserisci un numero tra 1 e ' + difficulty + '. I numeri scelti sono: ' + userNums + ' (non puoi scegliere un numero precedentemente scelto.)')); // 3b) Altrimenti si continua chiedendo all’utente un altro numero.
+
+    if(conditionOfLoss.includes(userNum)) {
+        alert ('Hai perso! sei riuscito ad indovinare ' + userNums.length + ' numeri, che sono: '+ userNums); // 3a) Se il numero è presente nella lista dei numeri generati, la partita termina. 3c) La partita termina quando il giocatore inserisce un numero “vietato”. 4a) Al termine della partita il software deve comunicare il punteggio, cioè il numero di volte che l’utente ha inserito un numero consentito.
+    } else if(userNum >= 0 && userNum <= difficulty && !userNums.includes(userNum) && !conditionOfLoss.includes(userNum)){
+        userNums.push(userNum);
+    } 
+    if (userNums.length == difficulty - 16) {
+        alert('Hai vinto!! I tuoi numeri vincenti sono :' + userNums) // 3d) O raggiunge il numero massimo possibile di numeri consentiti. 4a) Al termine della partita il software deve comunicare il punteggio, cioè il numero di volte che l’utente ha inserito un numero consentito.
+    }
+    i++;
+} 
+}
+
 
